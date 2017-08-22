@@ -1,0 +1,48 @@
+body{
+    background-color: #fafafa;
+}
+.panel-body{
+text-align:center;
+    
+}
+.panelpadding{
+    padding: 10px 65px 30px 65px;
+}
+.heading{
+    font-family: 'Pacifico', cursive;
+    margin-bottom: 20px;
+}
+.getapp{
+    width: 127px;
+    height: 40px;
+}
+.boxtext{
+    color:#999999;
+}
+.form-control{
+    margin-bottom: 10px;
+}
+.panel2{
+    margin-top: 40px;
+    text-align: center;
+    }
+.footer{
+        padding: 0 10px 0 10px;
+    color: #00357e;
+    font-weight: bold;
+    font-size: 12px;
+}
+.footer-bottom{
+    padding-bottom: 30px;
+}
+li {
+    list-style: none;    
+}
+ul li{
+  display: inline;
+}
+.panel{
+    position: absolute;
+    background-color: #fafafa;
+}
+.mySlides {display:none;}

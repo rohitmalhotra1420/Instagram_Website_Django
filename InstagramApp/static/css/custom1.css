@@ -1,0 +1,56 @@
+body{
+    background: #fafafa;
+}
+.heading{
+    border-width: 0 0 0 1px;
+    border-right-color: black;
+    border-style: solid;
+    font-size:25px;
+    padding-left: 20px;
+    margin-left: 20px;
+}
+
+.searchbar{
+        margin-top: 16px;
+    padding-left: 64px;
+    height: 26px;
+    width: 181px;
+}
+.righticons{
+    font-size: 30px;
+    margin-top: 10px;
+    margin-right: 36px;
+}
+
+
+@media(max-width:375px){
+    div.navbar-header{
+        padding-bottom: 48px;
+    }
+}
+
+.panelh{
+    background: white !important;
+    display: flex;
+}
+.panelb{
+    padding: 0;
+}
+.panelf{
+    background: white !important;
+}
+
+.logo{
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+}
+.brand{
+color:#262626;
+font-weight: bold;
+    margin-left: 20px;
+}
+.media{
+width: 100%;
+height: auto;
+}
