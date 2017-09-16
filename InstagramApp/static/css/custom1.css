@@ -54,3 +54,10 @@ font-weight: bold;
 width: 100%;
 height: auto;
 }
+.caption-caption{
+    margin: 0 0 10px 16px;
+}
+.caption-likes-no{
+        margin: 0 0 10px 16px;
+        font-weight: bold;
+}

@@ -22,11 +22,19 @@ from InstagramApp.views import signup_view
 from InstagramApp.views import login_view
 from InstagramApp.views import feed_view
 from InstagramApp.views import post_view
+from InstagramApp.views import like_view,comment_view,email_activate,otp_send,otp_receive
+
+
 urlpatterns = [
     url(r'^$', signup_view),
     url(r'^admin/',admin.site.urls),
     url(r'^login/', login_view),
     url(r'^feed/', feed_view),
     url(r'^post/', post_view),
+    url(r'^like/', like_view),
+    url(r'^comment/', comment_view),
+    url(r'^email_activate/', email_activate),
+    url(r'^otp_verification/',otp_send),
+    url(r'^otp_receive/',otp_receive)
 
 ]

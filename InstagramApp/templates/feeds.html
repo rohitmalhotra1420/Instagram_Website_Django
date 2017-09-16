@@ -36,6 +36,7 @@
       </div>
     </form>
     <ul class="nav navbar-nav navbar-right righticons">
+    <li><a href="/post"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
       <li><a href="#"><i class="fa fa-compass" aria-hidden="true"></i></a></li>
       <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
     <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
@@ -54,24 +55,72 @@
       
       
 <div class="col-md-6">
+
+  {% for post in posts %}
+
 <div class="panel panel-default">
 
 <div class="panel-heading panelh">
 
-<img src="img/aa.jpg" class="logo"><h5 class="brand">brand</h5>
+<img src="img/aa.jpg" class="logo"><h5 class="brand">{{ post.user.username }}</h5>
     
 </div>
 
 <div class="panel-body panelb">
-<img src="img/aa.jpg" class="media">
+<img src="{{ post.image_url }}" class="media">
 </div>
 
 <div class="panel-footer panelf">
-<div style="font-size:25px;"><span style="margin-right:20px;"><i class="fa fa-heart-o" aria-hidden="true"></i></span><i class="fa fa-comments-o" aria-hidden="true"></i></div>
+<div style="font-size:25px;display: flex;">
+    <span style="margin-right:20px;">
+         <form method="POST" action="/like/">
+          {% csrf_token %}
+          <input type="hidden" name="post" value="{{ post.id }}">
+    {% if post.has_liked %}
+                <input type="submit" class="btn btn-default" value="Unlike">
+                {% else %}
+                <input type="submit" class="btn btn-default" value="Like">
+                {% endif %}
+
+      </form>
+    </span>
+    <i class="fa fa-comments-o" aria-hidden="true"></i>
+</div>
 
 </div>
-    
-</div>    
+
+    <div class="caption">
+         <h5 class="caption-likes-no">{{ post.like_count }} likes</h5>
+    <h5 class="caption-caption"><strong>{{ post.user.username }}</strong>  {{ post.caption }}</h5>
+</div>
+
+
+
+
+
+<form method="POST" action="/comment/">
+  {% csrf_token %}
+  <input type="hidden" name="post" value="{{ post.id }}" >
+  <input type="text" name="comment_text" id="comment_text" placeholder="Make a comment.." value="{{ comment_text }}">
+  {{ comment_text }}
+  <input type="submit" class="btn-default btn" value="Comment">
+</form>
+
+ <div>
+
+      {% for comment in post.comments %}
+
+        <p>
+          {{ comment.user.username }}
+          {{ comment.created_on }}: {{ comment.comment_text }}
+        </p>
+
+      {% endfor %}
+
+      </div>
+</div>
+
+  {% endfor %}
 </div>
       
 

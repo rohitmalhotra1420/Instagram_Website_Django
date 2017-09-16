@@ -12,7 +12,7 @@
 
 </style>
 <body>
-<form method="POST" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" action="">
     {% csrf_token %}
     {{ form }}
     <button type="submit"class="btn btn-danger">Choose Media</button>

@@ -37,11 +37,11 @@
       <h4 class="boxtext">Sign up to see photos and videos from your friends.</h4>
 <button type="button" style="background-color:#3897f0;font-weight:bold;" class="btn btn-primary btn-block"><i class="fa fa-facebook-official"></i> Log in with Facebook</button>
     <h5>OR</h5>
-          <form method="post">
+          <form method="post" action="feed\">
               {% csrf_token %}
-          <input type="text" class="form-control" id="usr" placeholder="Username"value={{ username }}>
-          <input type="password" class="form-control" id="usr" placeholder="Password" value={{ password }}>
-          <button type="button"style="background-color:#3897f0;font-weight:bold;" class="btn btn-primary btn-block">Log In</button>
+          <input type="text" class="form-control" id="usr" placeholder="Username"name="username"value={{ username }}>
+          <input type="password" class="form-control" id="pwd" placeholder="Password" name="password" value={{ password }}>
+          <button type="submit"style="background-color:#3897f0;font-weight:bold;" class="btn btn-primary btn-block">Log In</button>
           </form>
           <h5 class="boxtext"style="margin-top:20px;">By signing up, you agree to our <strong>Terms</strong> & <strong>Privacy Policy</strong>.</h5>
 

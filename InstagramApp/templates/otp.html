@@ -36,7 +36,13 @@
       <h1 class="heading">Instagram</h1>
       <h4 class="boxtext">Sign up to see photos and videos from your friends.</h4>
 <button type="button" style="background-color:#3897f0;font-weight:bold;" class="btn btn-primary btn-block"><i class="fa fa-facebook-official"></i> Log in with Facebook</button>
-    <br>          <h5 class="boxtext"style="margin-top:20px;">Successfully Signed Up.<br> Check Inbox for Email Verification.</h5>
+    <br>
+          <form method="post">
+              {% csrf_token %}
+          <input type="text" class="form-control" id="usr" name="number" placeholder="Your Phone Number"value={{ number }}>
+          <button type="submit"style="background-color:#3897f0;font-weight:bold;" class="btn btn-primary btn-block">Receive Otp</button>
+          </form>
+          <h5 class="boxtext"style="margin-top:20px;">Your Number will only saved to us for security Reasons.</h5>
 
     </div></div>
           <div class=" panel2 ">
