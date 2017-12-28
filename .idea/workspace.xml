@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="216b12f2-1079-4887-a610-39d65eb56f7c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InstagramApp/static/js/custom.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InstagramApp/templates/profile.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instagram/settings.py" afterPath="$PROJECT_DIR$/Instagram/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Instagram/urls.py" afterPath="$PROJECT_DIR$/Instagram/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InstagramApp/admin.py" afterPath="$PROJECT_DIR$/InstagramApp/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InstagramApp/static/css/custom1.css" afterPath="$PROJECT_DIR$/InstagramApp/static/css/custom1.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InstagramApp/templates/enter_otp.html" afterPath="$PROJECT_DIR$/InstagramApp/templates/enter_otp.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InstagramApp/templates/feeds.html" afterPath="$PROJECT_DIR$/InstagramApp/templates/feeds.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InstagramApp/views.py" afterPath="$PROJECT_DIR$/InstagramApp/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
