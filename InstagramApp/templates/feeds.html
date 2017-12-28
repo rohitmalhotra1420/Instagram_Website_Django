@@ -12,12 +12,37 @@
       <link href="../static/css/custom1.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
       <script src="https://use.fontawesome.com/c2854c2e83.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<style>
+    .unlike{
+        font-size: 25px;
+        padding-top: 0;
+    }
+    .like{
+        font-size: 25px;
+        padding-top: 0;
+    }
 
+    .comments{
+        padding-left: 16px;
+    }
+    .comment_box{
+            background: 0 0;
+    border: none;
+    color: #262626;
+    font-size: inherit;
+    outline: none;
+    padding: 0;
+    resize: none;
+    width: 95%;
+    }
+
+</style>
 
   </head>
   <body>
-<nav class="navbar navbar-default"style="height:78px;background:#ffffff;">
+<nav class="navbar navbar-default navbar-fixed-top"style="height:78px;background:#ffffff;">
   <div class="container-fluid">
     <div class="navbar-header">
          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -37,16 +62,17 @@
     </form>
     <ul class="nav navbar-nav navbar-right righticons">
     <li><a href="/post"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
-      <li><a href="#"><i class="fa fa-compass" aria-hidden="true"></i></a></li>
-      <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-    <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+   <!--   <li><a href="#"><i class="fa fa-compass" aria-hidden="true"></i></a></li>
+      <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>-->
+    <li><a href="/user_profile"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+      <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
 
     </ul>
       </div></div>
 </nav>
       
       
-    
+    <div style="margin-top: 130px;" >
       
 <div class="col-md-3 hidden-xs">
       
@@ -70,72 +96,168 @@
 <img src="{{ post.image_url }}" class="media">
 </div>
 
-<div class="panel-footer panelf">
+<div class="panel-footer panelf"style="padding-left: 0;">
 <div style="font-size:25px;display: flex;">
-    <span style="margin-right:20px;">
-         <form method="POST" action="/like/">
+    <span style="margin-right:8px;">
+         <form id="likeForm" method="post" action="" >
           {% csrf_token %}
-          <input type="hidden" name="post" value="{{ post.id }}">
+          <input type="hidden" name="post" id="postId"value="{{ post.id }}">
     {% if post.has_liked %}
-                <input type="submit" class="btn btn-default" value="Unlike">
+  <button class="btn btn-link like"type="button"><i class="fa fa-heart" aria-hidden="true"style="color:#ed4956;"></i></button>
                 {% else %}
-                <input type="submit" class="btn btn-default" value="Like">
+          <button class="btn btn-link like"type="button" ><i class="fa fa-heart-o" aria-hidden="true"style=color:#333333;"></i></button>
                 {% endif %}
 
       </form>
     </span>
-    <i class="fa fa-comments-o" aria-hidden="true"></i>
+    <i class="fa fa-comments-o" aria-hidden="true"style="padding-top: 5px;"></i>
 </div>
 
 </div>
 
     <div class="caption">
-         <h5 class="caption-likes-no">{{ post.like_count }} likes</h5>
-    <h5 class="caption-caption"><strong>{{ post.user.username }}</strong>  {{ post.caption }}</h5>
+        <h5 class="caption-likes-no"><span id="likeCount">{{ post.like_count }}</span> likes</h5>
+    <h5 class="caption-caption"style="margin-bottom: 5px;"><strong>{{ post.user.username }}</strong>  {{ post.caption }}</h5>
 </div>
 
 
 
+ <div class="comments">
 
 
-<form method="POST" action="/comment/">
-  {% csrf_token %}
-  <input type="hidden" name="post" value="{{ post.id }}" >
-  <input type="text" name="comment_text" id="comment_text" placeholder="Make a comment.." value="{{ comment_text }}">
-  {{ comment_text }}
-  <input type="submit" class="btn-default btn" value="Comment">
-</form>
 
- <div>
-
+        <p style="line-height: 25px;">
+        <span style="color: #999999;">Comments</span> <br>
+ </p>
+       <span class="updated1">
       {% for comment in post.comments %}
+           <span class="updated2">
 
-        <p>
-          {{ comment.user.username }}
-          {{ comment.created_on }}: {{ comment.comment_text }}
-        </p>
+               <span>
+          <strong class="cmntuser">{{ comment.user.username }}</strong>
+             <span class="cmnttext">{{ comment.comment_text }}</span>
 
+          </span>
+
+
+
+           </span>
+
+
+
+
+<br>
+<!--        <span style="color: #999999;">
+            {{ comment.created_on }}
+
+        </span>
+-->
       {% endfor %}
 
+</span>
+
+
       </div>
+<hr style="width: 95%;
+    margin-top: 10px;">
+
+
+
+
+
+
+    <section style="padding: 0 26px 0 15px;">
+<form method="POST" action="">
+  {% csrf_token %}
+<div class="form-group"style="display: flex;">
+      <input type="hidden" name="post" value="{{ post.id }}"id="cmntPostId" >
+  <textarea type="submit" class="comment_box" rows="1" id="comment" name="comment_text" placeholder="Add a comment...">{{ comment_text }}</textarea>
+    <button type="button"class="btn btn-link"id="commentBtn"style="padding-top:0px; "><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+</div>
+
+</form>
+</section>
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
   {% endfor %}
 </div>
       
 
-      
+
       
 <div class="col-md-3 hidden-xs">
       
 </div>
+
+
+<p class="testing"></p>
+    </div>
       
-      
-      
+      <script>
+
+
+$('#commentBtn').on('click',function(){
+    var cmntPostId=$('#cmntPostId').val();
+    var commentText=$('.comment_box').val();
+    var user=$('.brand').text();
+    var updatedlength=$('.updated2').length;
+
+    console.log(commentText);
+    $.ajax({
+        method:'POST',
+        url:'/comment/',
+        dataType:'json',
+        data:{
+            'cmntPostId':cmntPostId,
+            'commentText':commentText,
+            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
+        },
+        success:function(result){
+            console.log(result.text);
+            var final_comment=result.text;
+            console.log(updatedlength);
+            if(final_comment.length>0){
+               if(updatedlength==0){
+                   var cc= '<span class="updated2"><span><strong class="cmntuser">'+user+'</strong><span class="cmnttext">'+final_comment+'</span></span></span>';
+                   $('.updated1').html(cc);
+                   console.log("comment Successful 1");
+               }
+               else if(updatedlength==1) {
+                   $('.updated2').append(" <br/><span><strong>" + user + "</strong><span>" + final_comment + "</span></span>");
+                   console.log("comment Successful 2");
+               }
+            }
+            else{
+                console.log("comment unsuccessful");
+
+            }
+        },
+    });
+});
+
+
+
+
+</script>
       
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="..static/js/bootstrap.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+  <script src="../static/js/custom.js"></script>
+
+
+
   </body>
 </html>

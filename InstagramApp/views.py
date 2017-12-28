@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 from django.shortcuts import HttpResponseRedirect
+from django.http import JsonResponse
 from django.core.mail import send_mail
 from forms import SignUpForm
 from forms import LoginForm
@@ -22,15 +23,19 @@ import pyotp
 import sendgrid
 import os
 from sendgrid.helpers.mail import *
-
-
+from django.contrib.auth import logout
+import nexmo
 
 TWILIO_ACCOUNT_SID = 'AC10f5e164b1e86db138c25be3019ee199'
 TWILIO_AUTH_TOKEN = '61816dc5a5701775b63caf590adb8756'
 num=7607904382
 my_twilio="+1"+str(num)
-#totp = pyotp.TOTP('JBSWY3DPEHPK3PXP')
-#pin=totp.now()
+totp = pyotp.TOTP('JBSWY3DPEHPK3PXP')
+pin=totp.now()
+
+#NEXMO_API_KEY='5c5e821f'
+#NEXMO_API_SECRET='03fbb5b222ab1913'
+
 
 
 # Create your views here.
@@ -89,13 +94,17 @@ def otp_send(request):
             user = UserModel(number=number)
             user.save()
 
-            totp = pyotp.TOTP('JBSWY3DPEHPK3PXP')
-            pin=totp.now()
-            global pin
-
+            #totp = pyotp.TOTP('JBSWY3DPEHPK3PXP')
+            #pin=totp.now()
+            #global pin
+            #client = nexmo.Client(key=NEXMO_API_KEY, secret=NEXMO_API_SECRET)
+            #client.send_message({
+             #   'from': 'Instagram',
+              #  'to': user_number,
+             #   'text':"Instagram Verification Code:"+pin+". Only valid for 30 seconds.",
+            #})
             client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-
-            client.messages.create(to=user_number, from_=my_twilio,body=pin)
+            client.messages.create(to=user_number, from_=my_twilio,body="Instagram Verification Code:"+pin+". Only valid for 30 seconds.")
 
             return HttpResponseRedirect('/otp_receive/')
         else:
@@ -198,21 +207,37 @@ def feed_view(request):
         return redirect('/login/')
 
 
+def profile_view(request):
+    user = check_validation(request)
+    if user:
+        posts = PostModel.objects.all().order_by('-created_on')
+        return render(request, 'profile.html', {'posts': posts,'user':user})
+    else:
+        return redirect('/login/')
+
+
 def like_view(request):
     user = check_validation(request)
     if user and request.method == 'POST':
-        form = LikeForm(request.POST)
-        if form.is_valid():
-            post_id = form.cleaned_data.get('post').id
+        #form = LikeForm(request.POST)
+        #if form.is_valid():
+            #post_id = form.cleaned_data.get('post').id
+        post_id=request.POST['postId']
+        existing_like = LikeModel.objects.filter(post_id=post_id, user=user).first()
 
-            existing_like = LikeModel.objects.filter(post_id=post_id, user=user).first()
+        if not existing_like:
+            LikeModel.objects.create(post_id=post_id, user=user)
+            data={
+                "flag":True
+            }
+        else:
+            existing_like.delete()
+            data = {
+                "flag": False
+            }
 
-            if not existing_like:
-                LikeModel.objects.create(post_id=post_id, user=user)
-            else:
-                existing_like.delete()
+        return JsonResponse(data)
 
-            return redirect('/feed/')
 
     else:
         return redirect('/login/')
@@ -221,15 +246,28 @@ def like_view(request):
 def comment_view(request):
   user = check_validation(request)
   if user and request.method == 'POST':
-    form = CommentForm(request.POST)
-    if form.is_valid():
-      post_id = form.cleaned_data.get('post').id
-      comment_text = form.cleaned_data.get('comment_text')
-      comment = CommentModel.objects.create(user=user, post_id=post_id, comment_text=comment_text)
-      comment.save()
-      return redirect('/feed/')
-    else:
-      return redirect('/feed/')
+    #form = CommentForm(request.POST)
+    #if form.is_valid():
+    post_id = request.POST['cmntPostId']
+    comment_text = request.POST['commentText']
+    comment = CommentModel.objects.create(user=user, post_id=post_id, comment_text=comment_text)
+    comment.save()
+    created_comment={
+        "text":comment_text,
+    }
+    return JsonResponse(created_comment)
   else:
     return redirect('/login')
+
+
+
+def logout(request):
+    user = check_validation(request)
+    if user:
+        token = SessionToken.objects.filter(user=user)
+        token.delete()
+        return redirect('/login/')
+    else:
+        return redirect('/login/')
+
 

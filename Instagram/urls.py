@@ -22,7 +22,7 @@ from InstagramApp.views import signup_view
 from InstagramApp.views import login_view
 from InstagramApp.views import feed_view
 from InstagramApp.views import post_view
-from InstagramApp.views import like_view,comment_view,email_activate,otp_send,otp_receive
+from InstagramApp.views import like_view,comment_view,email_activate,otp_send,otp_receive,logout,profile_view
 
 
 urlpatterns = [
@@ -35,6 +35,8 @@ urlpatterns = [
     url(r'^comment/', comment_view),
     url(r'^email_activate/', email_activate),
     url(r'^otp_verification/',otp_send),
-    url(r'^otp_receive/',otp_receive)
+    url(r'^otp_receive/',otp_receive),
+    url(r'^user_profile/',profile_view),
+    url(r'^logout/',logout)
 
 ]

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Instagram</title>
+
+    <!-- Bootstrap -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+      <link href="../static/css/custom1.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+      <script src="https://use.fontawesome.com/c2854c2e83.js"></script>
+
+<style>
+
+    .gallery_product
+{
+    margin-bottom: 30px;
+}
+
+      .box1{
+        margin-top: 120px;
+    }
+    .box2{
+        margin-top: 120px;
+    }
+
+.post-image {
+    opacity: 1;
+    width: 293px;
+    height: 293px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+#md4-space{
+    position: relative;
+}
+#md4-space:hover .middle {
+  opacity: 1;
+}
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+
+.text {
+  background-color: transparent;
+  color: white;
+  font-size: 30px;
+  padding: 16px 32px;
+}
+
+#md4-space:hover .post-image {
+  opacity:0.6;
+     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(90%);
+}
+
+#dp{
+    width: 152px;
+    height: 152px;
+    border-radius: 80px;
+    margin-left: 40px;
+}
+
+
+    @media(max-width: 500px){
+        .post-image{
+            height: 130px;
+        }
+        #md8-row{
+            padding: 0;
+
+        }
+        #md4-space{
+            padding:0;
+        }
+        #dp{
+            width: 100px;
+            height: 100px;
+            margin-left: 0;
+        }
+    }
+
+</style>
+
+  </head>
+  <body>
+<nav class="navbar navbar-default navbar-fixed-top"style="height:78px;background:#ffffff;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#" style=" font-family: 'Pacifico', cursive;color:#262626;padding-left:45px;">
+<i class="fa fa-instagram" style="font-size:35px;"aria-hidden="true"></i> <span class="heading">Instagram</span></a>
+      </div>
+       <div class="collapse navbar-collapse" id="myNavbar">
+       <form class="navbar-form navbar-left">
+      <div class="form-group" style="position: relative;display: inline-flex;">
+        <input type="text" class="searchbar" placeholder="Search">
+               <span style="position:absolute;padding:18px 0 0 45px;"><i class="fa fa-search" aria-hidden="true"></i></span>
+      </div>
+    </form>
+    <ul class="nav navbar-nav navbar-right righticons">
+    <li><a href="/post"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
+   <!--
+      <li><a href="#"><i class="fa fa-compass" aria-hidden="true"></i></a></li>
+      <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+      -->
+    <li><a href="/logout"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+
+    </ul>
+      </div></div>
+</nav>
+
+
+<div class="container-fluid box1">
+    <div class="row">
+
+
+    <div class="col-md-2 ">
+    </div>
+
+    <div class=" col-md-2"style=""id="dp-box">
+                <img src="https://i.imgur.com/VuyL6Vn.jpg" class=" img-responsive "id="dp">
+        </div>
+
+        <div class="col-md-6">
+<div>
+            <h1 style="display: inline;">{{ user.username }}</h1> <button class="btn btn-default"style="margin: 0 15px 13px 13px;">Edit Profile</button><i class="fa fa-cog"style="font-size: 30px;" aria-hidden="true"></i>
+</div>
+            <div>
+
+            </div>
+    </div>
+
+        <div class="col-md-2">
+    </div>
+
+
+</div>
+
+</div>
+
+
+
+<div class="box2">
+
+    <div class="col-md-2 hidden-xs">
+    </div>
+
+        <div class="col-md-8 col-sm-8 col-xs-8 hidden-xs"id="md8-row">
+{% for post in posts %}
+
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-4 filter hdpe"id="md4-space">
+                <img src="{{ post.image_url }}" class="post-image img-responsive ">
+              <div class="middle">
+    <div class="text"><i class="fa fa-heart" aria-hidden="true"style="color:#ed4956;"></i>  <i class="fa fa-comment-o" aria-hidden="true"style="color:#333333;"></i></div>
+  </div>
+            </div>
+
+      {% endfor %}
+
+
+        </div>
+
+        <div class="col-md-2 hidden-xs">
+    </div>
+
+</div>
+
+
+        <div class="col-md-12 col-sm-12 col-xs-12 hidden-lg"id="md8-row">
+{% for post in posts %}
+
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-4 filter hdpe"id="md4-space">
+                <img src="{{ post.image_url }}" class="post-image img-responsive ">
+              <div class="middle">
+    <div class="text"><p>{{ post.like_count }} </p><i class="fa fa-heart" aria-hidden="true"style="color:#ed4956;"></i>  <i class="fa fa-comment-o" aria-hidden="true"style="color:#333333;"></i></div>
+  </div>
+            </div>
+
+      {% endfor %}
+
+
+        </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../static/js/bootstrap.min.js"></script>
+  </body>
+</html>
