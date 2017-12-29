@@ -25,7 +25,7 @@ SECRET_KEY = 'v4!zn4yt%f2_4lq42%=4+h5=m=%c#v-sqav3qi6_$_b9x#33kz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["instaapplication.herokuapp.com"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -76,20 +76,30 @@ WSGI_APPLICATION = 'Instagram.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':   'instagram',
-        'USER':   'root',
-        'PASSWORD':'r@ohit7876rm',
-        'HOST':'127.0.0.1',
-        'PORT':'3306',
-    }
-}
+#DATABASES = {
+ #   'default': {
+  #      'ENGINE': 'django.db.backends.mysql',
+   #     'NAME':   'instagram',
+    #    'USER':   'root',
+     #   'PASSWORD':'r@ohit7876rm',
+      #  'HOST':'127.0.0.1',
+       # 'PORT':'3306',
+    #}
+#}
 
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
+
+DATABASES={
+        'Host':'ec2-50-17-234-234.compute-1.amazonaws.com',
+        'Database':'d5118bdmslg5pf',
+        'User':'jkheskdvgbfjfj',
+        'Port':'5432',
+        'Password':'19b8fc8a623c458e056ab01062f672cc31f9301781f9496810121205d0f5445f',
+        'URI':'postgres://jkheskdvgbfjfj:19b8fc8a623c458e056ab01062f672cc31f9301781f9496810121205d0f5445f@ec2-50-17-234-234.compute-1.amazonaws.com:5432/d5118bdmslg5pf'
+}
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
