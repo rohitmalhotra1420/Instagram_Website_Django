@@ -34,7 +34,7 @@ class PostModel(models.Model):
   created_on = models.DateTimeField(auto_now_add=True)
   updated_on = models.DateTimeField(auto_now=True)
   has_liked = False
-
+  has_post=False
   @property
   def like_count(self):
       return len(LikeModel.objects.filter(post=self))
@@ -61,3 +61,10 @@ class CommentModel(models.Model):
   updated_on = models.DateTimeField(auto_now=True)
 
 
+class ProfilePicModel(models.Model):
+    user = models.ForeignKey(UserModel)
+    image = models.FileField(upload_to='user_images')
+    image_url = models.CharField(max_length=255)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    has_picture=False

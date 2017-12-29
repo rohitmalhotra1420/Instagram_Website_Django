@@ -12,7 +12,8 @@
       <link href="../static/css/custom1.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
       <script src="https://use.fontawesome.com/c2854c2e83.js"></script>
-
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"></script>
+<link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/599px-Instagram_icon.png" type="image/gif" sizes="32x32">
 <style>
 
     .gallery_product
@@ -72,7 +73,14 @@
     margin-left: 40px;
 }
 
-
+.dropdown{
+        display: inline-block;
+    margin-bottom: 0px;
+    bottom: 7px;
+    right: 0px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
     @media(max-width: 500px){
         .post-image{
             height: 130px;
@@ -114,12 +122,13 @@
       </div>
     </form>
     <ul class="nav navbar-nav navbar-right righticons">
-    <li><a href="/post"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
+    <li><a href="/post"><i class="fa fa-picture-o" aria-hidden="true"data-toggle="tooltip" data-placement="left" title="Add Post"></i></a></li>
    <!--
       <li><a href="#"><i class="fa fa-compass" aria-hidden="true"></i></a></li>
       <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
       -->
-    <li><a href="/logout"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+         <li><a href="/feed/"><i class="fa fa-list" aria-hidden="true"data-toggle="tooltip" data-placement="left" title="Feeds"></i></a></li>
+    <li><a href="/logout/"><i class="fa fa-sign-out" aria-hidden="true"data-toggle="tooltip" data-placement="left" title="Log Out"></i></a></li>
 
     </ul>
       </div></div>
@@ -134,13 +143,36 @@
     </div>
 
     <div class=" col-md-2"style=""id="dp-box">
-                <img src="https://i.imgur.com/VuyL6Vn.jpg" class=" img-responsive "id="dp">
+
+
+        {% if profilepic.has_picture %}
+            <img src="{{ profilepic.image_url }}" class=" img-responsive "id="dp">
+        {% else %}
+             <img src="https://cdn3.iconfinder.com/data/icons/internet-and-web-4/78/internt_web_technology-13-512.png" id="dp">
+              {% endif %}
+
+
+
+
         </div>
 
         <div class="col-md-6">
-<div>
-            <h1 style="display: inline;">{{ user.username }}</h1> <button class="btn btn-default"style="margin: 0 15px 13px 13px;">Edit Profile</button><i class="fa fa-cog"style="font-size: 30px;" aria-hidden="true"></i>
-</div>
+            <div>
+                <h1 style="display: inline;">{{ user.username }}</h1>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Edit Profile
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                      <li class="dropdown-header">Profile Picture</li>
+                      <li><a href="/profile_pic">Change Photo</a></li>
+                      <li><a href=""data-toggle="modal" data-target="#removePic">Remove Photo</a></li>
+                      <li class="divider"></li>
+                      <li class="dropdown-header"></li>
+                      <li><a href="#"></a></li>
+                    </ul>
+                  </div>
+                <i class="fa fa-cog"style="font-size: 30px;" aria-hidden="true"></i>
+            </div>
             <div>
 
             </div>
@@ -198,9 +230,35 @@
         </div>
 
 
+
+<div class="modal fade" id="removePic" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Remove Photo</h4>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to remove photo ?</p>
+            <div style="display: inline-flex;">
+                 <form method="delete" action="/remove_profile_pic/">
+                <button type="submit" class="btn btn-danger" style="margin-right: 5px;">Yes</button>
+                </form>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../static/js/bootstrap.min.js"></script>
+   <script src="../static/js/custom.js"></script>
   </body>
 </html>

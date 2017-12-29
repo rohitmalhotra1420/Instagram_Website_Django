@@ -1,263 +1,270 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Instagram</title>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Instagram</title>
 
-    <!-- Bootstrap -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-      <link href="../static/css/custom1.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-      <script src="https://use.fontawesome.com/c2854c2e83.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+          <link href="../static/css/custom1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+          <script src="https://use.fontawesome.com/c2854c2e83.js"></script>
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="icon" href="https://instagram-brand.com/wp-content/uploads/2016/11/app-icon2.png" type="image/gif" sizes="32x32">
+    <style>
+        .unlike{
+            font-size: 25px;
+            padding-top: 0;
+        }
+        .like{
+            font-size: 25px;
+            padding-top: 0;
+        }
 
-<style>
-    .unlike{
-        font-size: 25px;
-        padding-top: 0;
+        .comments{
+            padding-left: 16px;
+        }
+        #commentIcon{
+            cursor: pointer;
+        }
+        .comment_box{
+                background: 0 0;
+        border: none;
+        color: #262626;
+        font-size: inherit;
+        outline: none;
+        padding: 0;
+        resize: none;
+        width: 95%;
+        }
+        .media{
+            position: relative;
+        }
+        .bigHeart1{
+            color:#ed4956;
+            position: absolute;
+        bottom: 55%;
+        left: 38%;
+        font-size: 160px;
+        }
+         .bigHeart2{
+            color:rgba(255,255,255,0.7);
+            position: absolute;
+        bottom: 55%;
+        left: 38%;
+        font-size: 160px;
+        }
+    @media(max-width: 500px) {
+        .bigHeart1{
+            bottom: 62%;
+        left: 34%;
+        font-size: 140px;
+        }
+         .bigHeart2{
+            bottom: 62%;
+        left: 34%;
+        font-size: 140px;
+        }
     }
-    .like{
-        font-size: 25px;
-        padding-top: 0;
-    }
+    </style>
 
-    .comments{
-        padding-left: 16px;
-    }
-    .comment_box{
-            background: 0 0;
-    border: none;
-    color: #262626;
-    font-size: inherit;
-    outline: none;
-    padding: 0;
-    resize: none;
-    width: 95%;
-    }
+      </head>
+      <body>
+    <nav class="navbar navbar-default navbar-fixed-top"style="height:78px;background:#ffffff;">
+      <div class="container-fluid">
+        <div class="navbar-header">
+             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" style=" font-family: 'Pacifico', cursive;color:#262626;padding-left:45px;">
+    <i class="fa fa-instagram" style="font-size:35px;"aria-hidden="true"></i> <span class="heading">Instagram</span></a>
+          </div>
+           <div class="collapse navbar-collapse" id="myNavbar">
+           <form class="navbar-form navbar-left">
+          <div class="form-group" style="position: relative;display: inline-flex;">
+            <input type="text" class="searchbar" placeholder="Search">
+                   <span style="position:absolute;padding:18px 0 0 45px;"><i class="fa fa-search" aria-hidden="true"></i></span>
+          </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right righticons">
+        <li><a href="/post"><i class="fa fa-picture-o" aria-hidden="true"data-toggle="tooltip" data-placement="left" title="Add Post"></i></a></li>
+       <!--   <li><a href="#"><i class="fa fa-compass" aria-hidden="true"></i></a></li>
+          <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>-->
+        <li><a href="/user_profile/"><i class="fa fa-user" aria-hidden="true"data-toggle="tooltip" data-placement="left" title="Profile"></i></a></li>
+          <li><a href="/logout/"><i class="fa fa-sign-out" aria-hidden="true"data-toggle="tooltip" data-placement="left" title="Log Out"></i></a></li>
 
-</style>
+        </ul>
+          </div></div>
+    </nav>
 
-  </head>
-  <body>
-<nav class="navbar navbar-default navbar-fixed-top"style="height:78px;background:#ffffff;">
-  <div class="container-fluid">
-    <div class="navbar-header">
-         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span> 
-      </button>
-      <a class="navbar-brand" href="#" style=" font-family: 'Pacifico', cursive;color:#262626;padding-left:45px;">
-<i class="fa fa-instagram" style="font-size:35px;"aria-hidden="true"></i> <span class="heading">Instagram</span></a>
-      </div>
-       <div class="collapse navbar-collapse" id="myNavbar">
-       <form class="navbar-form navbar-left">
-      <div class="form-group" style="position: relative;display: inline-flex;">
-        <input type="text" class="searchbar" placeholder="Search">
-               <span style="position:absolute;padding:18px 0 0 45px;"><i class="fa fa-search" aria-hidden="true"></i></span> 
-      </div>
-    </form>
-    <ul class="nav navbar-nav navbar-right righticons">
-    <li><a href="/post"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
-   <!--   <li><a href="#"><i class="fa fa-compass" aria-hidden="true"></i></a></li>
-      <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>-->
-    <li><a href="/user_profile"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-      <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
 
-    </ul>
-      </div></div>
-</nav>
-      
-      
-    <div style="margin-top: 130px;" >
-      
-<div class="col-md-3 hidden-xs">
-      
-</div>
-      
-      
-      
-<div class="col-md-6">
+        <div style="margin-top: 130px;" >
 
-  {% for post in posts %}
+    <div class="col-md-3 hidden-xs">
 
-<div class="panel panel-default">
-
-<div class="panel-heading panelh">
-
-<img src="img/aa.jpg" class="logo"><h5 class="brand">{{ post.user.username }}</h5>
-    
-</div>
-
-<div class="panel-body panelb">
-<img src="{{ post.image_url }}" class="media">
-</div>
-
-<div class="panel-footer panelf"style="padding-left: 0;">
-<div style="font-size:25px;display: flex;">
-    <span style="margin-right:8px;">
-         <form id="likeForm" method="post" action="" >
-          {% csrf_token %}
-          <input type="hidden" name="post" id="postId"value="{{ post.id }}">
-    {% if post.has_liked %}
-  <button class="btn btn-link like"type="button"><i class="fa fa-heart" aria-hidden="true"style="color:#ed4956;"></i></button>
-                {% else %}
-          <button class="btn btn-link like"type="button" ><i class="fa fa-heart-o" aria-hidden="true"style=color:#333333;"></i></button>
-                {% endif %}
-
-      </form>
-    </span>
-    <i class="fa fa-comments-o" aria-hidden="true"style="padding-top: 5px;"></i>
-</div>
-
-</div>
-
-    <div class="caption">
-        <h5 class="caption-likes-no"><span id="likeCount">{{ post.like_count }}</span> likes</h5>
-    <h5 class="caption-caption"style="margin-bottom: 5px;"><strong>{{ post.user.username }}</strong>  {{ post.caption }}</h5>
-</div>
+    </div>
 
 
 
- <div class="comments">
+        {% if firstpost.has_post %}
 
+    <div class="col-md-6">
+        <span>
+      {% for post in posts %}
 
+    <div class="panel panel-default">
 
-        <p style="line-height: 25px;">
-        <span style="color: #999999;">Comments</span> <br>
- </p>
-       <span class="updated1">
-      {% for comment in post.comments %}
-           <span class="updated2">
+    <div class="panel-heading panelh">
+    {% if profilepic.has_picture %}
+    <img src="{{ profilepic.image_url }}" class="logo">
+        {% else %}
+        <img src="https://cdn3.iconfinder.com/data/icons/internet-and-web-4/78/internt_web_technology-13-512.png" class="logo">
+        {% endif %}
+    <h5 class="brand">{{ post.user.username }}</h5>
+    </div>
 
-               <span>
-          <strong class="cmntuser">{{ comment.user.username }}</strong>
-             <span class="cmnttext">{{ comment.comment_text }}</span>
+    <div class="panel-body panelb">
+    <img src="{{ post.image_url }}" class="media">
+        <i class="fa fa-heart bigHeart1 animated pulse  hidden"id="bigLike" aria-hidden="true"></i>
+            <i class="fa fa-heart bigHeart2 animated pulse hidden "id="bigUnlike" aria-hidden="true"></i>
+    </div>
 
-          </span>
+    <div class="panel-footer panelf"style="padding-left: 0;">
+    <div style="font-size:25px;display: flex;">
+        <span style="margin-right:8px;">
+             <form id="likeForm" method="post" action="" >
+              {% csrf_token %}
+              <input type="hidden" name="post" id="postId"value="{{ post.id }}">
+        {% if post.has_liked %}
+      <button class="btn btn-link like"type="button"><i class="fa fa-heart" aria-hidden="true"style="color:#ed4956;"></i></button>
+                    {% else %}
+              <button class="btn btn-link like"type="button" ><i class="fa fa-heart-o" aria-hidden="true"style=color:#333333;"></i></button>
+                    {% endif %}
 
-
-
-           </span>
-
-
-
-
-<br>
-<!--        <span style="color: #999999;">
-            {{ comment.created_on }}
-
+          </form>
         </span>
--->
+        <i class="fa fa-comments-o" id="commentIcon"aria-hidden="true"style="padding-top: 5px;"></i>
+    </div>
+
+    </div>
+
+        <div class="caption">
+            <h5 class="caption-likes-no"><span id="likeCount">{{ post.like_count }}</span> likes</h5>
+        <h5 class="caption-caption"style="margin-bottom: 5px;"><strong>{{ post.user.username }}</strong>  {{ post.caption }}</h5>
+    </div>
+
+
+
+     <div class="comments">
+
+
+
+            <p style="line-height: 25px;">
+            <span style="color: #999999;">Comments</span> <br>
+     </p>
+     <p class="hiddenUser hidden">{{ user.username }}</p>
+           <span class="updated1">
+          {% for comment in post.comments %}
+               <span class="updated2">
+
+                   <span>
+              <strong class="cmntuser">{{ comment.user.username }}</strong>
+                 <span class="cmnttext">{{ comment.comment_text }}</span>
+
+              </span>
+
+
+
+               </span>
+
+
+
+
+    <br>
+    <!--        <span style="color: #999999;">
+                {{ comment.created_on }}
+
+            </span>
+    -->
+          {% endfor %}
+
+    </span>
+
+
+          </div>
+    <hr style="width: 95%;
+        margin-top: 10px;">
+
+
+
+
+
+
+        <section style="padding: 0 26px 0 15px;">
+    <form method="POST" action="">
+      {% csrf_token %}
+    <div class="form-group"style="display: flex;">
+          <input type="hidden" name="post" value="{{ post.id }}"id="cmntPostId" >
+      <textarea type="submit" class="comment_box" rows="1" id="comment" name="comment_text" placeholder="Add a comment...">{{ comment_text }}</textarea>
+        <button type="button"class="btn btn-link"id="commentBtn"style="padding-top:0px; "><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+    </div>
+
+    </form>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
       {% endfor %}
 
-</span>
-
-
-      </div>
-<hr style="width: 95%;
-    margin-top: 10px;">
-
-
-
-
-
-
-    <section style="padding: 0 26px 0 15px;">
-<form method="POST" action="">
-  {% csrf_token %}
-<div class="form-group"style="display: flex;">
-      <input type="hidden" name="post" value="{{ post.id }}"id="cmntPostId" >
-  <textarea type="submit" class="comment_box" rows="1" id="comment" name="comment_text" placeholder="Add a comment...">{{ comment_text }}</textarea>
-    <button type="button"class="btn btn-link"id="commentBtn"style="padding-top:0px; "><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-</div>
-
-</form>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-</div>
-
-  {% endfor %}
-</div>
-      
-
-
-      
-<div class="col-md-3 hidden-xs">
-      
-</div>
-
-
-<p class="testing"></p>
+        </span>
     </div>
-      
-      <script>
+    {% else %}
+         <div class="col-md-6"style="text-align: center;">
+       <span>
+            <img src="https://instagram-brand.com/wp-content/uploads/2016/11/app-icon2.png"style="width: 25%;margin-top: 100px;"class="animated pulse infinite">
+        </span>
+    </div>
 
-
-$('#commentBtn').on('click',function(){
-    var cmntPostId=$('#cmntPostId').val();
-    var commentText=$('.comment_box').val();
-    var user=$('.brand').text();
-    var updatedlength=$('.updated2').length;
-
-    console.log(commentText);
-    $.ajax({
-        method:'POST',
-        url:'/comment/',
-        dataType:'json',
-        data:{
-            'cmntPostId':cmntPostId,
-            'commentText':commentText,
-            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
-        },
-        success:function(result){
-            console.log(result.text);
-            var final_comment=result.text;
-            console.log(updatedlength);
-            if(final_comment.length>0){
-               if(updatedlength==0){
-                   var cc= '<span class="updated2"><span><strong class="cmntuser">'+user+'</strong><span class="cmnttext">'+final_comment+'</span></span></span>';
-                   $('.updated1').html(cc);
-                   console.log("comment Successful 1");
-               }
-               else if(updatedlength==1) {
-                   $('.updated2').append(" <br/><span><strong>" + user + "</strong><span>" + final_comment + "</span></span>");
-                   console.log("comment Successful 2");
-               }
-            }
-            else{
-                console.log("comment unsuccessful");
-
-            }
-        },
-    });
-});
+      {% endif %}
 
 
 
+    <div class="col-md-3 hidden-xs">
 
-</script>
-      
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../static/js/bootstrap.min.js"></script>
-  <script src="../static/js/custom.js"></script>
+    </div>
 
 
+    <p class="testing"></p>
+        </div>
 
-  </body>
-</html>
+          <script>
+
+
+
+    </script>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../static/js/bootstrap.min.js"></script>
+      <script src="../static/js/custom.js"></script>
+
+
+
+      </body>
+    </html>

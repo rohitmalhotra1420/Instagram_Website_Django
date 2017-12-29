@@ -1,5 +1,5 @@
 from django import forms
-from models import UserModel,SessionToken,PostModel,LikeModel,CommentModel
+from models import UserModel,SessionToken,PostModel,LikeModel,CommentModel,ProfilePicModel
 
 
 class SignUpForm(forms.ModelForm):
@@ -10,7 +10,7 @@ class SignUpForm(forms.ModelForm):
 class OtpForm(forms.ModelForm):
     class Meta:
         model=UserModel
-        fields=['number']
+        fields=['number','username']
 
 
 
@@ -39,3 +39,7 @@ class CommentForm(forms.ModelForm):
     fields = ['comment_text', 'post']
 
 
+class ProfilePicForm(forms.ModelForm):
+    class Meta:
+        model=ProfilePicModel
+        fields=['image']

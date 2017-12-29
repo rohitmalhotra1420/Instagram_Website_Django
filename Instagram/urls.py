@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib import admin
 
 
@@ -22,7 +22,7 @@ from InstagramApp.views import signup_view
 from InstagramApp.views import login_view
 from InstagramApp.views import feed_view
 from InstagramApp.views import post_view
-from InstagramApp.views import like_view,comment_view,email_activate,otp_send,otp_receive,logout,profile_view
+from InstagramApp.views import like_view,comment_view,email_activate,otp_send,otp_receive,logout,profile_view,profile_pic,remove_profile_pic
 
 
 urlpatterns = [
@@ -37,6 +37,8 @@ urlpatterns = [
     url(r'^otp_verification/',otp_send),
     url(r'^otp_receive/',otp_receive),
     url(r'^user_profile/',profile_view),
+    url(r'^profile_pic/',profile_pic),
+    url(r'^remove_profile_pic/', remove_profile_pic),
     url(r'^logout/',logout)
 
 ]

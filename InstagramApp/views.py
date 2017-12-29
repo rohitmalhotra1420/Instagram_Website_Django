@@ -8,10 +8,10 @@ from django.core.mail import send_mail
 from forms import SignUpForm
 from forms import LoginForm
 from forms import PostForm
-from forms import LikeForm,CommentForm,OtpForm
+from forms import LikeForm,CommentForm,OtpForm,ProfilePicForm
 from models import UserModel
 from models import PostModel
-from models import LikeModel,CommentModel
+from models import LikeModel,CommentModel,ProfilePicModel
 from models import SessionToken
 from imgurpython import ImgurClient
 from django.http import HttpResponse
@@ -88,11 +88,13 @@ def otp_send(request):
     if request.method=="POST":
         form=OtpForm(request.POST)
         if form.is_valid():
+            username=form.cleaned_data['username']
             number=form.cleaned_data['number']
             user_number="+91"+str(number)
             # saving data to DB
-            user = UserModel(number=number)
-            user.save()
+            finduser = UserModel.objects.filter(username=username).first()
+            finduser.number=number
+            finduser.save()
 
             #totp = pyotp.TOTP('JBSWY3DPEHPK3PXP')
             #pin=totp.now()
@@ -117,7 +119,7 @@ def otp_receive(request):
     if request.method == "POST":
         otp_number=request.POST['otp_number']
         if otp_number==pin:
-            return HttpResponseRedirect('/feed/')
+            return HttpResponseRedirect('/login/')
         else:
             return HttpResponseRedirect('/otp_verification/')
 
@@ -198,11 +200,17 @@ def feed_view(request):
       user = check_validation(request)
       if user:
         posts = PostModel.objects.all().order_by('-created_on')
+        profilepic = ProfilePicModel.objects.filter(user=user).first()
+        firstpost = PostModel.objects.filter(user=user).first()
         for post in posts:
             existing_like=LikeModel.objects.filter(post_id=post.id,user=user).first()
             if existing_like:
                 post.has_liked=True
-        return render(request, 'feeds.html', {'posts' : posts})
+        if profilepic:
+            profilepic.has_picture=True
+        if firstpost:
+            firstpost.has_post=True
+        return render(request, 'feeds.html', {'posts' : posts,'user':user,'profilepic':profilepic,'firstpost':firstpost})
       else:
         return redirect('/login/')
 
@@ -211,7 +219,10 @@ def profile_view(request):
     user = check_validation(request)
     if user:
         posts = PostModel.objects.all().order_by('-created_on')
-        return render(request, 'profile.html', {'posts': posts,'user':user})
+        profilepic=ProfilePicModel.objects.filter(user=user).first()
+        if profilepic:
+            profilepic.has_picture=True
+        return render(request, 'profile.html', {'posts': posts,'user':user,'profilepic':profilepic})
     else:
         return redirect('/login/')
 
@@ -258,6 +269,46 @@ def comment_view(request):
     return JsonResponse(created_comment)
   else:
     return redirect('/login')
+
+
+def profile_pic(request):
+    user=check_validation(request)
+    if user:
+        if request.method == "GET":
+            form = ProfilePicForm()
+            return render(request, 'profilepic.html', {'form': form})
+        elif request.method == "POST":
+            form = ProfilePicForm(request.POST, request.FILES)
+            if form.is_valid():
+                image = form.cleaned_data.get('image')
+                post = ProfilePicModel(user=user, image=image)
+                post.save()
+                path = str(BASE_DIR + '/' + post.image.url)
+                client = ImgurClient("7c523b250772ade", "5307069c8ab8398c385cfbeacd51857ed22")
+                post.image_url = client.upload_from_path(path, anon=True)['link']
+                post.save()
+        return redirect('/user_profile/')
+
+    else:
+        return redirect('/login/')
+
+
+
+
+def remove_profile_pic(request):
+    user=check_validation(request)
+    if user:
+
+            post=ProfilePicModel.objects.filter(user=user).first()
+            post.delete()
+            print "profile Pic deleted"
+            return redirect('/user_profile/')
+
+    else:
+        return redirect('/login/')
+
+
+
 
 
 

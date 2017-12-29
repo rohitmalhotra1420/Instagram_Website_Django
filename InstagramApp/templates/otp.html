@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
       <script src="https://use.fontawesome.com/c2854c2e83.js"></script>
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/599px-Instagram_icon.png" type="image/gif" sizes="32x32">
   </head>
   <body>
 <div class="container-fluid">
@@ -37,8 +37,9 @@
       <h4 class="boxtext">Sign up to see photos and videos from your friends.</h4>
 <button type="button" style="background-color:#3897f0;font-weight:bold;" class="btn btn-primary btn-block"><i class="fa fa-facebook-official"></i> Log in with Facebook</button>
     <br>
-          <form method="post">
+          <form method="post" action="/otp_verification/">
               {% csrf_token %}
+              <input type="text" class="form-control"  name="username" placeholder="Username"value={{ username }}>
           <input type="text" class="form-control" id="usr" name="number" placeholder="Your Phone Number"value={{ number }}>
           <button type="submit"style="background-color:#3897f0;font-weight:bold;" class="btn btn-primary btn-block">Receive Otp</button>
           </form>
