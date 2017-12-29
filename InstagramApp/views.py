@@ -24,7 +24,7 @@ import sendgrid
 import os
 from sendgrid.helpers.mail import *
 from django.contrib.auth import logout
-import nexmo
+
 
 TWILIO_ACCOUNT_SID = 'AC10f5e164b1e86db138c25be3019ee199'
 TWILIO_AUTH_TOKEN = '61816dc5a5701775b63caf590adb8756'
