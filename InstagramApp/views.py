@@ -55,7 +55,7 @@ def signup_view(request):
             send_mail('E-Mail Verification',
                       ' HEY...Welcome To Instagram.'
                       '.click on the link below to get your account activated \n\n '
-                      'http://127.0.0.1:8000/email_activate/?user_email=' + email
+                      'https://instaapplication.herokuapp.com/email_activate/?user_email=' + email
                       ,
                       'rohit.malhotra1420@gmail.com',
                       [email],
