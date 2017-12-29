@@ -2,24 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="216b12f2-1079-4887-a610-39d65eb56f7c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0001_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0002_sessiontoken.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0003_postmodel.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0004_auto_20170819_1111.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0005_likemodel.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0006_commentmodel.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0007_usermodel_is_active.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0008_sendsms.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0009_auto_20170915_2130.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0010_auto_20170916_0859.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0011_auto_20170916_0902.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0012_auto_20170916_1040.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0013_auto_20170916_1109.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0014_auto_20170916_1110.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0015_auto_20170916_1113.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0016_auto_20170916_1120.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/InstagramApp/migrations/0017_profilepicmodel.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/runtime.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
