@@ -137,28 +137,30 @@
     <div class="panel-footer panelf"style="padding-left: 0;">
     <div style="font-size:25px;display: flex;">
         <span style="margin-right:8px;">
-             <form id="likeForm" method="post" action="" >
+             <form id="likeForm" method="post" action="" onclick="likefunction(this);" >
               {% csrf_token %}
               <input type="hidden" name="post" id="postId"value="{{ post.id }}">
         {% if post.has_liked %}
       <button class="btn btn-link like"type="button"><i class="fa fa-heart" aria-hidden="true"style="color:#ed4956;"></i></button>
                     {% else %}
-              <button class="btn btn-link like"type="button" ><i class="fa fa-heart-o" aria-hidden="true"style=color:#333333;"></i></button>
+              <button class="btn btn-link like"type="button" ><i class="fa fa-heart-o" aria-hidden="true"style="color:#333333;"></i></button>
                     {% endif %}
+             <i class="fa fa-comments-o" id="commentIcon"aria-hidden="true"style="padding-top: 5px;"onclick=""></i>
 
+             <div class="caption">
+                <h5 class="caption-likes-no"> <span name="likeCount">{{ post.like_count }}</span> likes</h5>
+                <h5 class="caption-caption"style="margin-bottom: 5px;"><strong >{{ post.user.username }}</strong>  {{ post.caption }}</h5>
+             </div>
           </form>
         </span>
-        <i class="fa fa-comments-o" id="commentIcon"aria-hidden="true"style="padding-top: 5px;"></i>
-    </div>
 
     </div>
 
-        <div class="caption">
-            <h5 class="caption-likes-no"><span id="likeCount">{{ post.like_count }}</span> likes</h5>
-        <h5 class="caption-caption"style="margin-bottom: 5px;"><strong>{{ post.user.username }}</strong>  {{ post.caption }}</h5>
     </div>
 
 
+
+ <form method="POST" action=""onclick="commentFunction(this);">
 
      <div class="comments">
 
@@ -167,10 +169,10 @@
             <p style="line-height: 25px;">
             <span style="color: #999999;">Comments</span> <br>
      </p>
-     <p class="hiddenUser hidden">{{ user.username }}</p>
+
            <span class="updated1">
           {% for comment in post.comments %}
-               <span class="updated2">
+               <span class="updated2"name="updated2">
 
                    <span>
               <strong class="cmntuser">{{ comment.user.username }}</strong>
@@ -206,18 +208,19 @@
 
 
         <section style="padding: 0 26px 0 15px;">
-    <form method="POST" action="">
+
       {% csrf_token %}
     <div class="form-group"style="display: flex;">
+          <p class="hiddenUser hidden">{{ user.username }}</p>
           <input type="hidden" name="post" value="{{ post.id }}"id="cmntPostId" >
       <textarea type="submit" class="comment_box" rows="1" id="comment" name="comment_text" placeholder="Add a comment...">{{ comment_text }}</textarea>
         <button type="button"class="btn btn-link"id="commentBtn"style="padding-top:0px; "><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
     </div>
 
-    </form>
+
     </section>
 
-
+   </form>
 
 
 
