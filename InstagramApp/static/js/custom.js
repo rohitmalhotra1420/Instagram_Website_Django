@@ -20,16 +20,25 @@ function likefunction(event){
                 likeCount++;
                 event.querySelector("[name=likeCount]").innerHTML=likeCount;
                 likeBtn.innerHTML='<i class="fa fa-heart" aria-hidden="true"style=color:#ed4956;"></i>';
-                $('#bigLike').removeClass('hidden');
-                setTimeout(function(){ $('#bigLike').addClass('hidden'); }, 1300);
+                /*this code is long
+                event.querySelector('[name=caption').insertAdjacentHTML('beforebegin','<i class="fa fa-heart bigHeart1 animated pulse"name="bigLike"id="bigLike" aria-hidden="true"style=""></i>');
+                var red='<i class="fa fa-heart bigHeart1 animated pulse"name="bigLike"id="bigLike" aria-hidden="true"style=" "></i>';
+                setTimeout(function(red){ event.querySelector('[name=bigLike]').remove(red); }, 1300);
+                */
+                event.querySelector('[name=bigLike]').style.display='block';
+                setTimeout(function(){ event.querySelector('[name=bigLike]').style.display='none';}, 1300);
                 console.log("like increased");
             }
             else{
                 likeCount--;
                 event.querySelector("[name=likeCount]").innerHTML=likeCount;
                 likeBtn.innerHTML='<i class="fa fa-heart-o" aria-hidden="true"style=color:#333333;"></i>';
-                $('#bigUnlike').removeClass('hidden');
-                setTimeout(function(){ $('#bigUnlike').addClass('hidden'); }, 1300);
+               /* event.querySelector('[name=caption').insertAdjacentHTML('beforebegin','<i class="fa fa-heart bigHeart2 animated pulse"name="bigUnlike"id="bigUnlike" aria-hidden="true"style=""></i>');
+                var white='<i class="fa fa-heart bigHeart2 animated pulse"name="bigUnlike"id="bigUnlike" aria-hidden="true"style=""></i>';
+                setTimeout(function(white){ event.querySelector('[name=bigUnlike]').remove(white); }, 1300);
+                */
+                event.querySelector('[name=bigUnlike]').style.display='block';
+                setTimeout(function(){ event.querySelector('[name=bigUnlike]').style.display='none';}, 1300);
                 console.log("like decreased");
 
             }

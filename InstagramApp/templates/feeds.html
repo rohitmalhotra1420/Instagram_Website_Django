@@ -41,32 +41,29 @@
         width: 95%;
         }
         .media{
-            position: relative;
+
         }
         .bigHeart1{
-            color:#ed4956;
-            position: absolute;
-        bottom: 55%;
-        left: 38%;
-        font-size: 160px;
+         color:#ed4956;position: absolute;top:205px;left: 38%;font-size: 160px;display: none;
+
         }
          .bigHeart2{
-            color:rgba(255,255,255,0.7);
-            position: absolute;
-        bottom: 55%;
-        left: 38%;
-        font-size: 160px;
+
+        color:rgba(255,255,255,0.7); position: absolute;top:205px; left: 38%;font-size: 160px;display: none;
+
         }
     @media(max-width: 500px) {
         .bigHeart1{
-            bottom: 62%;
-        left: 34%;
-        font-size: 140px;
+           top: 125px;
+        left: 36%;
+        font-size: 110px;
+            display: none;
         }
          .bigHeart2{
-            bottom: 62%;
-        left: 34%;
-        font-size: 140px;
+            top: 125px;
+        left: 36%;
+        font-size: 110px;
+             display: none;
         }
     }
     </style>
@@ -117,7 +114,7 @@
         <span>
       {% for post in posts %}
 
-    <div class="panel panel-default">
+    <div class="panel panel-default"style="position: relative;">
 
     <div class="panel-heading panelh">
     {% if profilepic.has_picture %}
@@ -130,8 +127,6 @@
 
     <div class="panel-body panelb">
     <img src="{{ post.image_url }}" class="media">
-        <i class="fa fa-heart bigHeart1 animated pulse  hidden"id="bigLike" aria-hidden="true"></i>
-            <i class="fa fa-heart bigHeart2 animated pulse hidden "id="bigUnlike" aria-hidden="true"></i>
     </div>
 
     <div class="panel-footer panelf"style="padding-left: 0;">
@@ -139,6 +134,7 @@
         <span style="margin-right:8px;">
              <form id="likeForm" method="post" action="" onclick="likefunction(this);" >
               {% csrf_token %}
+
               <input type="hidden" name="post" id="postId"value="{{ post.id }}">
         {% if post.has_liked %}
       <button class="btn btn-link like"type="button"><i class="fa fa-heart" aria-hidden="true"style="color:#ed4956;"></i></button>
@@ -146,8 +142,9 @@
               <button class="btn btn-link like"type="button" ><i class="fa fa-heart-o" aria-hidden="true"style="color:#333333;"></i></button>
                     {% endif %}
              <i class="fa fa-comments-o" id="commentIcon"aria-hidden="true"style="padding-top: 5px;"onclick=""></i>
-
-             <div class="caption">
+                <i class="fa fa-heart bigHeart1 animated pulse"name="bigLike"id="bigLike" aria-hidden="true"style=""></i>
+             <i class="fa fa-heart bigHeart2 animated pulse"name="bigUnlike"id="bigUnlike" aria-hidden="true"style=""></i>
+             <div class="caption" name="caption">
                 <h5 class="caption-likes-no"> <span name="likeCount">{{ post.like_count }}</span> likes</h5>
                 <h5 class="caption-caption"style="margin-bottom: 5px;"><strong >{{ post.user.username }}</strong>  {{ post.caption }}</h5>
              </div>
