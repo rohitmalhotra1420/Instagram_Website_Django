@@ -127,8 +127,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'rohit.malhotra1420@gmail.com'
+EMAIL_HOST_PASSWORD = 'r@ohit7876rm'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
