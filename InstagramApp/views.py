@@ -278,15 +278,32 @@ def profile_pic(request):
             form = ProfilePicForm()
             return render(request, 'profilepic.html', {'form': form})
         elif request.method == "POST":
-            form = ProfilePicForm(request.POST, request.FILES)
-            if form.is_valid():
-                image = form.cleaned_data.get('image')
-                post = ProfilePicModel(user=user, image=image)
-                post.save()
-                path = str(BASE_DIR + '/' + post.image.url)
-                client = ImgurClient("7c523b250772ade", "5307069c8ab8398c385cfbeacd51857ed22")
-                post.image_url = client.upload_from_path(path, anon=True)['link']
-                post.save()
+            post = ProfilePicModel.objects.filter(user=user).first()
+            #if already a profile pic is existing
+            if post:
+                post = ProfilePicModel.objects.filter(user=user).first()
+                post.delete()
+                print "profile Pic deleted"
+                form = ProfilePicForm(request.POST, request.FILES)
+                if form.is_valid():
+                    image = form.cleaned_data.get('image')
+                    post = ProfilePicModel(user=user, image=image)
+                    post.save()
+                    path = str(BASE_DIR + '/' + post.image.url)
+                    client = ImgurClient("7c523b250772ade", "5307069c8ab8398c385cfbeacd51857ed22")
+                    post.image_url = client.upload_from_path(path, anon=True)['link']
+                    post.save()
+            #if only default pic is there
+            else:
+                form = ProfilePicForm(request.POST, request.FILES)
+                if form.is_valid():
+                    image = form.cleaned_data.get('image')
+                    post = ProfilePicModel(user=user, image=image)
+                    post.save()
+                    path = str(BASE_DIR + '/' + post.image.url)
+                    client = ImgurClient("7c523b250772ade", "5307069c8ab8398c385cfbeacd51857ed22")
+                    post.image_url = client.upload_from_path(path, anon=True)['link']
+                    post.save()
         return redirect('/user_profile/')
 
     else:
