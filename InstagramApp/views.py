@@ -20,12 +20,10 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from twilio.rest import Client
 import pyotp
-import sendgrid
+from django.db.models import Q
 import os
-from sendgrid.helpers.mail import *
-from django.contrib.auth import logout
 
-
+from django.core import serializers
 TWILIO_ACCOUNT_SID = 'AC10f5e164b1e86db138c25be3019ee199'
 TWILIO_AUTH_TOKEN = '61816dc5a5701775b63caf590adb8756'
 num=7607904382
@@ -218,7 +216,7 @@ def feed_view(request):
 def profile_view(request):
     user = check_validation(request)
     if user:
-        posts = PostModel.objects.all().order_by('-created_on')
+        posts = PostModel.objects.filter(user=user).all().order_by('-created_on')
         profilepic=ProfilePicModel.objects.filter(user=user).first()
         if profilepic:
             profilepic.has_picture=True
@@ -325,7 +323,25 @@ def remove_profile_pic(request):
         return redirect('/login/')
 
 
-
+def search_user(request):
+    user=check_validation(request)
+    if user:
+        if request.method=='POST':
+            username=request.POST['userName']
+            print username
+            match=UserModel.objects.filter(Q(name__icontains=username)| Q(username__icontains=username))
+            data = serializers.serialize("json", match)
+            print data
+            if match:
+                return JsonResponse({
+                    'searchresult':data
+                })
+            else:
+                return JsonResponse({'message':'User Not Found'})
+        else:
+            return HttpResponseRedirect('/feed/')
+    else:
+        return HttpResponseRedirect('/login/')
 
 
 

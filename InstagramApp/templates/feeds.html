@@ -49,9 +49,21 @@
         }
          .bigHeart2{
 
-        color:rgba(255,255,255,0.7); position: absolute;top:205px; left: 38%;font-size: 160px;display: none;
+            color:rgba(255,255,255,0.7); position: absolute;top:205px; left: 38%;font-size: 160px;display: none;
 
         }
+         .loader{
+            position: absolute;
+            right: 3%;
+            bottom: 13%;
+         }
+
+         .cross{
+             position: absolute;
+            right: 3%;
+             pointer:cursor;
+            bottom: 13%;
+         }
     @media(max-width: 500px) {
         .bigHeart1{
            top: 125px;
@@ -82,12 +94,18 @@
     <i class="fa fa-instagram" style="font-size:35px;"aria-hidden="true"></i> <span class="heading">Instagram</span></a>
           </div>
            <div class="collapse navbar-collapse" id="myNavbar">
-           <form class="navbar-form navbar-left">
+           <form class="navbar-form navbar-left"method="post"onkeyup="searchUser(this);">
+               {% csrf_token %}
           <div class="form-group" style="position: relative;display: inline-flex;">
             <input type="text" class="searchbar" placeholder="Search">
-                   <span style="position:absolute;padding:18px 0 0 45px;"><i class="fa fa-search" aria-hidden="true"></i></span>
+                   <span class="searchIcon"><i class="fa fa-search" aria-hidden="true"></i></span>
+              <span id="loader"class="loader hidden"><img style="width:15px;"src="https://www.mainfreight.com/my-freight/Images/iOS/loader-512.gif" /></span>
+              <span id="cross"class="cross hidden"><i class="fa fa-close"></i></span>
           </div>
         </form>
+        <div id="searchResults">
+            <p class="errormessage hidden"></p>
+        </div>
         <ul class="nav navbar-nav navbar-right righticons">
         <li><a href="/post"><i class="fa fa-picture-o" aria-hidden="true"data-toggle="tooltip" data-placement="left" title="Add Post"></i></a></li>
        <!--   <li><a href="#"><i class="fa fa-compass" aria-hidden="true"></i></a></li>
@@ -234,6 +252,7 @@
     {% else %}
          <div class="col-md-6"style="text-align: center;">
        <span>
+           <h1>Post your first picture to view others</h1>
             <img src="https://instagram-brand.com/wp-content/uploads/2016/11/app-icon2.png"style="width: 25%;margin-top: 100px;"class="animated pulse infinite">
         </span>
     </div>

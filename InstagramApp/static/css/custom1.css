@@ -11,17 +11,59 @@ body{
 }
 
 .searchbar{
-        margin-top: 16px;
-    padding-left: 64px;
+    margin-top: 16px;
+    padding-left: 75px;
     height: 26px;
-    width: 181px;
+    width: 200px;
+    background-color: #fafafa;
+}
+.searchIcon{
+    position:absolute;
+    padding:18px 0 0 56px;
+}
+.errormessage{
+        margin: 20px 0 0 60px;
+}
+#searchResults{
+
+     background-color: white;
+    height: 290px;
+    position: absolute;
+    width: 238px;
+    left: 18%;
+    top: 90%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: scroll;
+    display: none;
+
 }
 .righticons{
     font-size: 30px;
     margin-top: 10px;
     margin-right: 36px;
 }
-
+.searchedUserContainer{
+    padding-top: 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+.searchedUserContainer:hover{
+    background-color: #fafafa;
+}
+.searchedDisplayPic{
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    margin-top: 5px;
+}
+.searchedname{
+    color:#737373;
+    font-size: 11px;
+}
+.searchedUsername{
+    font-weight: bold;
+    margin: 0;
+}
 
 @media(max-width:375px){
     div.navbar-header{

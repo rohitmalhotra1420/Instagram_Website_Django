@@ -66,23 +66,24 @@ function commentFunction(event){
             'csrfmiddlewaretoken':event.querySelector('input[name=csrfmiddlewaretoken]').value
         },
         success:function(result){
+            console.log(result);
             console.log(result.text);
             var final_comment=result.text;
             console.log(updatedlength);
             if(final_comment.length>0){
                if(updatedlength==0){
-                   var cc= '<span class="updated2"><span><strong class="cmntuser">'+user+'</strong><span class="cmnttext">'+final_comment+'</span></span></span>';
+                   var cc= '<span class="updated2"><span><strong class="cmntuser">'+user+'</strong><span class="cmnttext">'+" "+final_comment+'</span></span></span>';
                    event.querySelector('.updated1').innerHTML=cc;
                    event.querySelector('.comment_box').value='';
                    console.log("comment Successful 1");
                }
                else if(updatedlength==1) {
-                   event.querySelector('.updated2').insertAdjacentHTML('beforeend'," <br/><span><strong>" + user + "</strong><span>" + final_comment + "</span></span>");
+                   event.querySelector('.updated2').insertAdjacentHTML('beforeend'," <br/><span><strong>" + user + "</strong><span>" + " "+final_comment + "</span></span>");
                    event.querySelector('.comment_box').value='';
                    console.log("comment Successful 2");
                }
                else if(updatedlength>1) {
-                   event.querySelector('.updated1').insertAdjacentHTML('beforeend'," <span><span><strong>" + user + "</strong><span>" + final_comment + "</span></span></span><br/>");
+                   event.querySelector('.updated1').insertAdjacentHTML('beforeend'," <span><span><strong>" + user + "</strong><span>" + " "+final_comment + "</span></span></span><br/>");
                     event.querySelector('.comment_box').value='';
                    console.log("comment Successful 3");
                }
@@ -104,3 +105,94 @@ function focusFunction(e) {
    var f=e.querySelector('.comment_box')
        f.focus();
 };
+
+$('.searchbar').on('click',function(){
+   $('.searchbar').css('padding-left','28px').css('background-color','white');
+   $('.searchIcon').css('padding-left','8px');
+});
+
+
+
+function searchUser(event) {
+    var userName= $('.searchbar').val();
+    console.log(userName);
+    if(userName.length>0 && event.keyCode!=8){
+        $.ajax({
+       method:'POST',
+       url:'/search_user/',
+       dataType:'json',
+       beforeSend: function () {
+          $('#loader').removeClass('hidden');
+          if($('.errormessage').hasClass('hidden')==false){
+              $('.errormessage').toggleClass('hidden');
+          }
+       },
+       data:{
+           'userName':userName,
+           'csrfmiddlewaretoken':event.querySelector('input[name=csrfmiddlewaretoken]').value
+       },
+        success:function (response) {
+           if(response.searchresult){
+               var obj=JSON.parse(response.searchresult);
+               console.log(obj);
+               $('#searchResults').show();
+
+               var names=[];
+               var usernames=[];
+               for(i=0;i<obj.length;i++){
+                names.push(obj[i].fields["name"]);
+                usernames.push(obj[i].fields["username"]);
+               }
+               console.log(names+usernames);
+               var existingnames=[];
+               var existingusernames=[];
+               for(i=0;i<$('.searchedname').length;i++){
+                   var searchednames=$('.searchedname').eq( i ).html();;
+                   var searchedusernames=$('.searchedUsername').eq( i ).html();;
+                   existingnames.push(searchednames);
+                   existingusernames.push(searchedusernames);
+               }
+               console.log(existingnames+existingusernames);
+
+               for(i=0;i<names.length;i++){
+                   console.log(names[i]+usernames[i]);
+                    if(existingnames.indexOf(names[i].toUpperCase())==-1 && existingusernames.indexOf(usernames[i]==-1)){
+
+                       for(i=0;i<obj.length;i++){
+                         console.log(obj[i].fields['username']);
+                         var html=' <div class="container-fluid searchedUserContainer"> <div class="row"> <div class="col-md-3"> <img src="https://i.imgur.com/vMfyeUG.jpg" class="searchedDisplayPic"> </div><div class="col-md-9"style="padding-left: 0px;"> <p class="searchedUsername">'+usernames[i]+'</p><p class="searchedname">'+names[i].toUpperCase()+'</p></div></div></div>';
+                            $('#searchResults').append(html);
+               }
+                    }
+               }
+
+
+               $('#loader').addClass('hidden');
+                $('#cross').removeClass('hidden');
+           }
+           else if(response.message){
+               console.log(response.message);
+               $('.errormessage').html(response.message).toggleClass('hidden');
+               $('#searchResults').show();
+               $('.searchedUserContainer').remove();
+               $('#loader').addClass('hidden');
+
+           }
+
+        },
+    });
+    }
+    else{
+        $('#searchResults').hide();
+    }
+}
+
+$('.fa-close').on('click',function(){
+   $('#cross').addClass('hidden');
+   $('.searchbar').blur().css('padding-left','75px');
+   $('.searchbar').val("");
+   $('.searchIcon').css('padding-left','56px');
+   $('#searchResults').hide();
+   $('.searchedUserContainer').remove();
+});
+
