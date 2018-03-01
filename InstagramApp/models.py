@@ -43,7 +43,9 @@ class PostModel(models.Model):
   def comments(self):
       return CommentModel.objects.filter(post=self).order_by('created_on')
 
-
+  @property
+  def comment_count(self):
+      return len(CommentModel.objects.filter(post=self))
 
 
 class LikeModel(models.Model):

@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import HttpResponseRedirect
 from django.http import JsonResponse
 from django.core.mail import send_mail
@@ -34,7 +35,8 @@ pin=totp.now()
 #NEXMO_API_KEY='5c5e821f'
 #NEXMO_API_SECRET='03fbb5b222ab1913'
 
-
+from django.contrib.auth.models import User
+from friendship.models import Friend, Follow
 
 # Create your views here.
 
@@ -223,7 +225,21 @@ def profile_view(request):
         return render(request, 'profile.html', {'posts': posts,'user':user,'profilepic':profilepic})
     else:
         return redirect('/login/')
-
+@csrf_exempt
+def profile_by_search(request):
+    user=check_validation(request)
+    if user:
+        username=request.POST.get('username')
+        print username
+        searcheduser=UserModel.objects.filter(username=username).first()
+        posts = PostModel.objects.filter(user=searcheduser).all().order_by('-created_on')
+        profilepic = ProfilePicModel.objects.filter(user=searcheduser).first()
+        if profilepic:
+            print username+str(searcheduser)
+            profilepic.has_picture = True
+        return render(request, 'profile.html', {'posts': posts, 'user': searcheduser, 'profilepic': profilepic})
+    else:
+        return redirect('/login/')
 
 def like_view(request):
     user = check_validation(request)

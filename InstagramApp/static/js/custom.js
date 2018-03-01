@@ -54,6 +54,9 @@ function commentFunction(event){
     var commentText=event.querySelector('.comment_box').value;
     var user=event.querySelector('.hiddenUser').innerHTML;
     var updatedlength=event.getElementsByClassName('updated2').length;
+    var commentcount=event.querySelector('.commentcount2').value;
+    commentcount=Number(commentcount)+1;
+    console.log(commentcount);
 
     console.log(commentText);
     $.ajax({
@@ -71,6 +74,7 @@ function commentFunction(event){
             var final_comment=result.text;
             console.log(updatedlength);
             if(final_comment.length>0){
+                event.querySelector('.commentcount').innerHTML=commentcount;
                if(updatedlength==0){
                    var cc= '<span class="updated2"><span><strong class="cmntuser">'+user+'</strong><span class="cmnttext">'+" "+final_comment+'</span></span></span>';
                    event.querySelector('.updated1').innerHTML=cc;
@@ -153,20 +157,24 @@ function searchUser(event) {
                    existingusernames.push(searchedusernames);
                }
                console.log(existingnames+existingusernames);
-
+                /*var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'csrfmiddlewaretoken';
+                input.value = '{% csrf_token %}';*/
                for(i=0;i<names.length;i++){
                    console.log(names[i]+usernames[i]);
                     if(existingnames.indexOf(names[i].toUpperCase())==-1 && existingusernames.indexOf(usernames[i]==-1)){
 
                        for(i=0;i<obj.length;i++){
                          console.log(obj[i].fields['username']);
-                         var html=' <div class="container-fluid searchedUserContainer"> <div class="row"> <div class="col-md-3"> <img src="https://i.imgur.com/vMfyeUG.jpg" class="searchedDisplayPic"> </div><div class="col-md-9"style="padding-left: 0px;"> <p class="searchedUsername">'+usernames[i]+'</p><p class="searchedname">'+names[i].toUpperCase()+'</p></div></div></div>';
+                         var html='<div class="container-fluid searchedUserContainer"> <div class="row"> <div class="col-md-3"> <img src="https://i.imgur.com/vMfyeUG.jpg" class="searchedDisplayPic"> </div><div class="col-md-9"style="padding-left: 0px;"> <form class="viewprofile"action="/profile_by_search/"method="post"onclick="submitform(this);"><p class="searchedUsername"" >'+usernames[i]+'</p><input type="hidden"name="username"value='+usernames[i]+'></form><p class="searchedname">'+names[i].toUpperCase()+'</p></div></div></div>';
                             $('#searchResults').append(html);
-               }
+
                     }
                }
 
 
+               }
                $('#loader').addClass('hidden');
                 $('#cross').removeClass('hidden');
            }
@@ -196,3 +204,40 @@ $('.fa-close').on('click',function(){
    $('.searchedUserContainer').remove();
 });
 
+function profile_by_search(event) {
+    var username=event.querySelector('.searchedUsername').innerHTML;
+    console.log(username);
+    $.ajaxSetup({
+        headers: { "X-CSRFToken": getCookie("csrftoken") }
+    });
+    $.ajax({
+        method:'POST',
+        url: '/profile_by_search/',
+        data: {
+            'username':username,
+    },
+
+    });
+
+}
+
+function getCookie(c_name)
+{
+    if (document.cookie.length > 0)
+    {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1)
+        {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) c_end = document.cookie.length;
+            return unescape(document.cookie.substring(c_start,c_end));
+        }
+    }
+    return "";
+ }
+
+
+ function submitform(event) {
+     event.submit();
+ }

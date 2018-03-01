@@ -22,8 +22,8 @@ from InstagramApp.views import signup_view
 from InstagramApp.views import login_view
 from InstagramApp.views import feed_view
 from InstagramApp.views import post_view
-from InstagramApp.views import like_view,comment_view,email_activate,otp_send,otp_receive,logout,profile_view,profile_pic,remove_profile_pic,search_user
-
+from InstagramApp.views import like_view,comment_view,email_activate,otp_send,otp_receive,logout,profile_view,profile_pic,remove_profile_pic,search_user,profile_by_search
+from InstagramApp.views import create_request
 
 urlpatterns = [
     url(r'^$', signup_view),
@@ -40,6 +40,8 @@ urlpatterns = [
     url(r'^profile_pic/',profile_pic),
     url(r'^remove_profile_pic/', remove_profile_pic),
     url(r'^search_user/',search_user),
+    url(r'^profile_by_search/',profile_by_search),
+    url(r'^create_request/', create_request),
     url(r'^logout/',logout)
 
 ]

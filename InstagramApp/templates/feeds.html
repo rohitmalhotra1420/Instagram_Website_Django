@@ -105,6 +105,7 @@
         </form>
         <div id="searchResults">
             <p class="errormessage hidden"></p>
+
         </div>
         <ul class="nav navbar-nav navbar-right righticons">
         <li><a href="/post"><i class="fa fa-picture-o" aria-hidden="true"data-toggle="tooltip" data-placement="left" title="Add Post"></i></a></li>
@@ -180,7 +181,8 @@
 
 
             <p style="line-height: 25px;">
-            <span style="color: #999999;">Comments</span> <br>
+                <b class="commentcount" >{{ post.comment_count }}</b> <span style="color: #999999;">Comments</span> <br>
+                <input type="hidden"class="commentcount2"value="{{ post.comment_count }}">
      </p>
 
            <span class="updated1">

@@ -37,6 +37,8 @@ body{
     display: none;
 
 }
+
+
 .righticons{
     font-size: 30px;
     margin-top: 10px;
@@ -102,4 +104,16 @@ height: auto;
 .caption-likes-no{
         margin: 0 0 10px 16px;
         font-weight: bold;
+}
+
+.follow-unfollow{
+    margin-top: 10px;
+}
+.follow-btn{
+    width: 35%;
+    height: 32px;
+}
+.unfollow-btn{
+    width: 35%;
+    height: 32px;
 }
